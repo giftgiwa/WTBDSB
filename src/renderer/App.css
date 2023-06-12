@@ -1,0 +1,156 @@
+@font-face {
+  font-family: "Microgramma D Extended Bold";
+  src: url("../../assets/fonts/Microgramma D Extended Bold.otf")
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../../assets/fonts/JetBrainsMono-Regular.ttf")
+}
+
+@font-face {
+  font-family: "JetBrains Mono Bold";
+  src: url("../../assets/fonts/JetBrainsMonoNL-Bold.ttf")
+}
+
+b {
+  font-family: "JetBrains Mono Bold";
+}
+
+
+p {
+  font-family: "JetBrains Mono";
+}
+
+#LOGIN {
+  width: 100%;
+  top: 100px;
+  height: 300px;
+  color: black;
+  display: inline-block;
+  position:absolute;
+}
+
+h1 {
+  font-family: "Microgramma D Extended Bold";
+  font-size: 84px;
+  z-index: 99;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  margin:0;
+}
+
+h2 {
+  font-family: "JetBrains Mono Bold";
+  font-size: 30px;
+  text-align: center;
+}
+
+body {
+  margin: 0;
+}
+
+*:focus {
+  outline: none;
+}
+
+#perspective-grid {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  position: absolute;
+  opacity: 0.3;
+  z-index: -1;
+  top: 50%;
+  width: 100vw;
+  height: 50vh;
+}
+
+
+/* Classes */
+
+.prevent-select {
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.prevent-drag {
+	-webkit-user-drag: none;
+	-webkit-app-region: no-drag;
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.horizontal-center {
+  position: relative;
+  left: 50%;
+  -moz-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+*:focus {
+    outline: none;
+}
+
+
+/* BACK BUTTONS */
+
+.btn {
+  font-family: "Jetbrains Mono";
+  position: relative;
+  font-size: 18px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  display: block;
+  padding: 15px;
+  padding-top:7px;
+  padding-bottom:7px;
+  width: 300px;
+  border: 2px solid black;
+  left: 50%;
+  text-align: center;
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+  transition: 0.3s;
+  background: black;
+  color: white;
+  cursor: crosshair;
+}
+
+.btn:hover {
+  background: white;
+  color: black;
+}
+
+.small-btn {
+  width: 50px;
+  height: 50px;
+  padding: 5px;
+  border: 0px;
+  box-sizing: border-box;
+  cursor: crosshair;
+  transition: 0.2s;
+  background-color: rgba(0, 0, 0, 0);
+  position: absolute;
+  margin: 0px;
+}
+
+.small-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+#arrow-back {
+  width: 30px;
+  height: 30px;
+  top: 5px;
+  left: 5px;
+}
