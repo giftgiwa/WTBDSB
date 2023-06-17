@@ -1,2 +1,2 @@
 # WTBDSB
- 2D/2D graphing desktop applicaton, built with Electron.
+ 2D/2D graphing desktop applicaton with user authentication, built with Electron.
