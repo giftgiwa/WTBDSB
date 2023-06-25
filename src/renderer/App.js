@@ -1,9 +1,3 @@
-/* eslint-disable react/self-closing-comp */
-/* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable react/button-has-type */
-/* eslint-disable camelcase */
-/* eslint-disable import/order */
-/* eslint-disable prettier/prettier */
 import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
 import { useNavigate } from 'react-router'
 
@@ -48,8 +42,13 @@ function Welcome() {
 function Login() {
   const navigate = useNavigate()
   function handleClickBack() {navigate("/")} // back to home
-  // function handleLoginClick() {navigate("/graphs")} // next page...
+  function handleLoginClick() { // next page...
+    navigate("/graphs")
+  }
 
+  function getValue() {
+    console.log(document.getElementById("login-button").value)
+  }
 
   return (
     <div  id = "LOGIN">
@@ -63,9 +62,7 @@ function Login() {
         <p>username</p>
         <input className = "inputs horizontal-center" type="text" id="username" name="username"></input>
 
-        <button className = "btn prevent-drag" id = "login-button">log in</button>
-
-
+        <button className = "btn prevent-drag" id = "login-button" onClick = {getValue}>log in</button>
       </div>
     </div>
   )
@@ -86,10 +83,7 @@ function Signup() {
 
       <div className = "prevent-drag center" id = "signup-form">
 
-
       </div>
-
-
     </div>
   )
 }
