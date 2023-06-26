@@ -11,11 +11,11 @@ import './CSS/Login.css'
 import './CSS/Signup.css'
 
 
-// grid background with overlaying gradient
+// grid background with overlaying white gradient
 function Background() {
   return (
     <div id = "background">
-      <img className = "prevent-select prevent-drag absolute" id = "perspective-grid" src={perspective_grid}></img>
+      <img className = "prevent-select prevent-drag absolute" id = "perspective-grid" draggable="false" src={perspective_grid}></img>
     </div>
   )
 }
@@ -46,8 +46,8 @@ function Login() {
     navigate("/graphs")
   }
 
-  function getValue() {
-    console.log(document.getElementById("login-button").value)
+  function getUsername() {
+    console.log(document.getElementById("username").value)
   }
 
   return (
@@ -62,7 +62,7 @@ function Login() {
         <p>username</p>
         <input className = "inputs horizontal-center" type="text" id="username" name="username"></input>
 
-        <button className = "btn prevent-drag" id = "login-button" onClick = {getValue}>log in</button>
+        <button className = "btn prevent-drag" id = "login-button" onClick = {getUsername}>log in</button>
       </div>
     </div>
   )
@@ -75,6 +75,11 @@ function Signup() {
   function handleClick() { // back to home
     navigate("/");
   }
+
+  function getUsername() {
+    console.log(document.getElementById("username").value + " " + document.getElementById("username").value)
+  }
+
   return (
     <div id = "SIGNUP">
       <button className = "small-btn prevent-drag" id = "back" onClick={handleClick}>
@@ -82,6 +87,22 @@ function Signup() {
       </button>
 
       <div className = "prevent-drag center" id = "signup-form">
+      <h2 className = "prevent-select">sign up</h2>
+
+      <p>username</p>
+      <input className = "inputs horizontal-center" type="text" id="username" name="username"></input>
+
+      <p>confirm username</p>
+      <input className = "inputs horizontal-center" type="text" id="username" name="username"></input>
+
+      {/* <p>password</p>
+      <input className = "inputs horizontal-center" type="text" id="username" name="username"></input>
+
+      <p>confirm password</p>
+      <input className = "inputs horizontal-center" type="text" id="username" name="username"></input> */}
+
+      <button className = "btn prevent-drag" id = "signup-button" onClick = {getUsername}>sign up</button>
+
 
       </div>
     </div>

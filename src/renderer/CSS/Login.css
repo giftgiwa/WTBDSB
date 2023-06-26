@@ -14,23 +14,9 @@
 
 #login-form {
     width: calc(100% - 375px);
-    height: calc(100% - 250px);
     background-color: rgba(255, 255, 255, 0.5);
     position: absolute;
     border: 1.5px solid black;
-}
-
-.inputs {
-    display: block;
-    background-color: rgba(0, 0, 0, 0.1);
-    border: 0;
-    transition: 0.2s;
-    height: 40px;
-    width: calc(100% - 40px);
-    margin: 0;
-    font-family: "JetBrains Mono";
-    padding: 10px;
-    box-sizing: border-box;
 }
 
 .inputs:hover {

@@ -20,6 +20,9 @@ b {
 
 p {
   font-family: "JetBrains Mono";
+  margin-top: 16px;
+  margin-bottom: 4px;
+  margin-left:20px;
 }
 
 #LOGIN {
@@ -47,12 +50,31 @@ h2 {
   text-align: center;
 }
 
+html {
+  width: 800px;
+  height: 600px;
+}
+
 body {
   margin: 0;
+  overflow: hidden;
 }
 
 *:focus {
   outline: none;
+}
+
+#background {
+  position: absolute;
+  top:0;
+  left:0;
+  right: 0;
+  bottom: 0;
+  margin:0;
+  position: absolute;
+  width: calc(800px);
+  height: calc(600px);
+  background: linear-gradient(180deg, #FFFFFF 50%, rgba(255, 255, 255, 0) 100%);
 }
 
 #perspective-grid {
@@ -62,12 +84,32 @@ body {
   opacity: 0.3;
   z-index: -1;
   top: 50%;
-  width: 100vw;
-  height: 50vh;
+  width: 100%;
+  height: 50%;
 }
 
 
-/* Classes */
+/* BUTTONS ON HOME PAGE */
+
+#login {
+  width: 300px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+#signup {
+  width: 300px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+#guest {
+  width: 300px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+/* CLASSES */
 
 .prevent-select {
   -webkit-user-select: none;
@@ -101,6 +143,21 @@ body {
     outline: none;
 }
 
+/* INPUT FIELDS */
+
+.inputs {
+  display: block;
+  background-color: rgba(0, 0, 0, 0.1);
+  border: 0;
+  transition: 0.2s;
+  height: 40px;
+  width: calc(100% - 40px);
+  margin: 0;
+  font-family: "JetBrains Mono";
+  padding: 10px;
+  box-sizing: border-box;
+}
+
 
 /* BACK BUTTONS */
 
@@ -108,13 +165,12 @@ body {
   font-family: "Jetbrains Mono";
   position: relative;
   font-size: 18px;
-  margin-top: 8px;
-  margin-bottom: 8px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   display: block;
-  padding: 15px;
   padding-top:7px;
   padding-bottom:7px;
-  width: 300px;
+  width: calc(100% - 40px);
   border: 2px solid black;
   left: 50%;
   text-align: center;
@@ -154,3 +210,8 @@ body {
   top: 5px;
   left: 5px;
 }
+
+#root {
+  overflow: hidden;
+}
+
