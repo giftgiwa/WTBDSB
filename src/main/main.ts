@@ -74,6 +74,7 @@ const createWindow = async () => {
     show: false,
     width: 800,
     height: 600,
+    title: 'WTBDSB',
     minWidth: 800,
     minHeight: 600,
     titleBarStyle: 'hidden',
@@ -124,7 +125,6 @@ const createWindow = async () => {
 /**
  * Add event listeners...
  */
-
 app.on('window-all-closed', () => {
   // Respect the OSX convention of having the application in memory even
   // after all windows have been closed

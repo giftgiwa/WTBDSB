@@ -10,6 +10,8 @@ import './CSS/Home.css'
 import './CSS/Login.css'
 import './CSS/Signup.css'
 
+import { writeUserData } from '../backend/database.js'
+
 
 // grid background with overlaying white gradient
 function Background() {
@@ -73,11 +75,17 @@ function Signup() {
 
   const navigate = useNavigate();
   function handleClick() { // back to home
-    navigate("/");
+    navigate("/")
   }
 
-  function getUsername() {
-    console.log(document.getElementById("username").value + " " + document.getElementById("username").value)
+  function handleUsername() {
+    // console.log(document.getElementById("username").value + " " + document.getElementById("confirm-username").value)
+
+    if (document.getElementById("username").value !== document.getElementById("confirm-username").value) {
+      console.log("Error: usernames don't match!")
+    }
+    let username = document.getElementById("username").value
+    writeUserData(username, username)
   }
 
   return (
@@ -87,23 +95,22 @@ function Signup() {
       </button>
 
       <div className = "prevent-drag center" id = "signup-form">
-      <h2 className = "prevent-select">sign up</h2>
+        <h2 className = "prevent-select">sign up</h2>
 
-      <p>username</p>
-      <input className = "inputs horizontal-center" type="text" id="username" name="username"></input>
+        <p>username</p>
+        <input className = "inputs horizontal-center" type="text" id="username" name="username"></input>
 
-      <p>confirm username</p>
-      <input className = "inputs horizontal-center" type="text" id="username" name="username"></input>
+        <p>confirm username</p>
+        <input className = "inputs horizontal-center" type="text" id="confirm-username" name="username"></input>
 
-      {/* <p>password</p>
-      <input className = "inputs horizontal-center" type="text" id="username" name="username"></input>
+        {/* <p>password</p>
+        <input className = "inputs horizontal-center" type="text" id="username" name="username"></input>
 
-      <p>confirm password</p>
-      <input className = "inputs horizontal-center" type="text" id="username" name="username"></input> */}
+        <p>confirm password</p>
+        <input className = "inputs horizontal-center" type="text" id="username" name="username"></input> */}
 
-      <button className = "btn prevent-drag" id = "signup-button" onClick = {getUsername}>sign up</button>
-
-
+        <button className = "btn prevent-drag" id = "signup-button" onClick = {handleUsername}>sign up</button>
+        <div id = "error-message"></div>
       </div>
     </div>
   )
