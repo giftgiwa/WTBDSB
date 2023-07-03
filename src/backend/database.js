@@ -4,8 +4,7 @@ import { getDatabase, ref, set } from "firebase/database";
 // TODO: Replace the following with your app's Firebase project configuration
 // See: https://firebase.google.com/docs/web/learn-more#config-object
 const firebaseConfig = {
-  // ...
-  // The value of `databaseURL` depends on the location of the database
+  // URL of the Firebase realtime database
   databaseURL: "https://wtbdsb-7d385-default-rtdb.firebaseio.com/",
 };
 
@@ -13,7 +12,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 // initialize Realtime Database and get a reference to the service
-const database = getDatabase(app);
+// const database = getDatabase(app);
 
 // write user data to Firebase database - to be called each time the sign up button is pressed
 export function writeUserData(userId, name) {
@@ -21,4 +20,8 @@ export function writeUserData(userId, name) {
   set(ref(db, 'users/' + userId), {
     username: name,
   });
+}
+
+export function getUserData(userId, name) {
+  
 }
