@@ -3,8 +3,6 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import '../App.css'
 import '../CSS/Signup.css'
 
-
-
 // signup page
 export default function Signup() {
 
@@ -49,7 +47,7 @@ export default function Signup() {
 
 
       </div>
-      {/* <p id = "error-message"></p> */}
+      <p id = "error-message"></p>
     </div>
   )
 }

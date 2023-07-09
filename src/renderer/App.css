@@ -14,19 +14,19 @@
 }
 
 b {
-  font-family: "JetBrains Mono Bold";
+  font-family: "JetBrains Mono Bold", monospace;
 }
 
 
 p {
-  font-family: "JetBrains Mono";
+  font-family: "JetBrains Mono", monospace;
   margin-top: 16px;
   margin-bottom: 4px;
   margin-left:20px;
 }
 
 h1 {
-  font-family: "Microgramma D Extended Bold";
+  font-family: "Microgramma D Extended Bold", monospace;
   font-size: 84px;
   z-index: 99;
   width: 100%;
@@ -36,7 +36,7 @@ h1 {
 }
 
 h2 {
-  font-family: "JetBrains Mono Bold";
+  font-family: "JetBrains Mono Bold", monospace;
   font-size: 30px;
   text-align: center;
 }
@@ -129,10 +129,6 @@ body {
   transform: translateX(-50%);
 }
 
-*:focus {
-    outline: none;
-}
-
 /* INPUT FIELDS */
 
 .inputs {
@@ -143,7 +139,7 @@ body {
   height: 40px;
   width: calc(100% - 40px);
   margin: 0;
-  font-family: "JetBrains Mono";
+  font-family: "JetBrains Mono", monospace;
   padding: 10px;
   box-sizing: border-box;
 }
@@ -152,7 +148,7 @@ body {
 /* BACK BUTTONS */
 
 .btn {
-  font-family: "Jetbrains Mono";
+  font-family: "Jetbrains Mono", monospace;
   position: relative;
   font-size: 18px;
   margin-top: 20px;
