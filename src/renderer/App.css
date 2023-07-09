@@ -25,15 +25,6 @@ p {
   margin-left:20px;
 }
 
-#LOGIN {
-  width: 100%;
-  top: 100px;
-  height: 300px;
-  color: black;
-  display: inline-block;
-  position:absolute;
-}
-
 h1 {
   font-family: "Microgramma D Extended Bold";
   font-size: 84px;
@@ -65,7 +56,6 @@ body {
 }
 
 #background {
-  position: absolute;
   top:0;
   left:0;
   right: 0;

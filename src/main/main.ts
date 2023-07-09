@@ -90,6 +90,7 @@ const createWindow = async () => {
     fullscreen: false,
     maximizable: false
   });
+  
 
   mainWindow.loadURL(resolveHtmlPath('index.html'));
 

@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../../../assets/fonts/JetBrainsMono-Regular.ttf")
+}
+
 #SIGNUP {
   width: calc(100% - 100px);
   height: calc(100% - 100px);
@@ -17,8 +22,9 @@
   border: 1.5px solid black;
 }
 
-#error-message {
+/* #error-message {
   width: calc(100% - 375px);
-  
-}
+  font-family: 'JetBrains Mono';
+  color: #FF4646;
+} */
 

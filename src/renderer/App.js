@@ -1,17 +1,13 @@
-import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
+import { MemoryRouter as Router, Routes, Route } from 'react-router-dom'
 import { useNavigate } from 'react-router'
 
 import perspective_grid from '../../assets/images/perspective_grid.jpg'
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import TitleBar from './COMPONENTS/title_bar.js'
+import Login from './COMPONENTS/Login.js'
+import Signup from './COMPONENTS/Signup.js'
 
 import './App.css'
 import './CSS/Home.css'
-import './CSS/Login.css'
-import './CSS/Signup.css'
-
-import { writeUserData } from '../backend/database.js'
-
 
 // grid background with overlaying white gradient
 function Background() {
@@ -40,81 +36,8 @@ function Welcome() {
   )
 }
 
-// login page
-function Login() {
-  const navigate = useNavigate()
-  function handleClickBack() {navigate("/")} // back to home
-  function handleLoginClick() { // next page...
-    navigate("/graphs")
-  }
 
-  function getUsername() {
-    console.log(document.getElementById("username").value)
-  }
 
-  return (
-    <div  id = "LOGIN">
-      <button className = "small-btn prevent-drag" id = "back" onClick={handleClickBack}>
-        <ArrowBackIosNewIcon id = "arrow-back"></ArrowBackIosNewIcon>
-      </button>
-
-      <div className = "prevent-drag center" id = "login-form">
-        <h2 className = "prevent-select">log in</h2>
-
-        <p>username</p>
-        <input className = "inputs horizontal-center" type="text" id="username" name="username"></input>
-
-        <button className = "btn prevent-drag" id = "login-button" onClick = {getUsername}>log in</button>
-      </div>
-    </div>
-  )
-}
-
-// signup page
-function Signup() {
-
-  const navigate = useNavigate();
-  function handleClick() { // back to home
-    navigate("/")
-  }
-
-  function handleUsername() {
-    // console.log(document.getElementById("username").value + " " + document.getElementById("confirm-username").value)
-
-    if (document.getElementById("username").value !== document.getElementById("confirm-username").value) {
-      console.log("Error: usernames don't match!")
-    }
-    let username = document.getElementById("username").value
-    writeUserData(username, username)
-  }
-
-  return (
-    <div id = "SIGNUP">
-      <button className = "small-btn prevent-drag" id = "back" onClick={handleClick}>
-        <ArrowBackIosNewIcon id = "arrow-back"></ArrowBackIosNewIcon>
-      </button>
-
-      <div className = "prevent-drag center" id = "signup-form">
-        <h2 className = "prevent-select">sign up</h2>
-
-        <p>username</p>
-        <input className = "inputs horizontal-center" type="text" id="username" name="username"></input>
-
-        <p>confirm username</p>
-        <input className = "inputs horizontal-center" type="text" id="confirm-username" name="username"></input>
-
-        {/* <p>password</p>
-        <input className = "inputs horizontal-center" type="text" id="username" name="username"></input>
-
-        <p>confirm password</p>
-        <input className = "inputs horizontal-center" type="text" id="username" name="username"></input> */}
-
-        <button className = "btn prevent-drag" id = "signup-button" onClick = {handleUsername}>sign up</button>
-        <div id = "error-message"></div>
-      </div>
-    </div>
-  )
-}
 
 // full routing for the above pages.
 export default function App() {

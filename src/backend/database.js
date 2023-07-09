@@ -15,13 +15,14 @@ const app = initializeApp(firebaseConfig);
 // const database = getDatabase(app);
 
 // write user data to Firebase database - to be called each time the sign up button is pressed
-export function writeUserData(userId, name) {
-  const db = getDatabase();
+export function addUserData(userId, name) {
+  const db = getDatabase()
   set(ref(db, 'users/' + userId), {
     username: name,
-  });
+  })
 }
 
 export function getUserData(userId, name) {
-  
+  const db = getDatabase()
+
 }
