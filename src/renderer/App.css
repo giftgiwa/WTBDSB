@@ -201,3 +201,16 @@ body {
   overflow: hidden;
 }
 
+.error-message {
+  text-align: center;
+  width: calc(100% - 375px);
+  color: #FF4646;
+  display:block;
+  position: absolute;
+  margin: 0;
+  bottom: 50px;
+  left: 50%;
+  -moz-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}

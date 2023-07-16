@@ -22,10 +22,5 @@
   border: 1.5px solid black;
 }
 
-#error-message {
-  width: calc(100% - 375px);
-  font-family: 'JetBrains Mono';
-  color: #FF4646;
-  display:inline-block;
-}
+
 

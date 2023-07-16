@@ -3,17 +3,18 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import '../CSS/Login.css'
 import '../App.css'
 
+import { getUserData } from '../../backend/database.js'
+
+// document.getElementById('button').disabled = true;
 
 // login page
 export default function Login() {
   const navigate = useNavigate()
   function handleClickBack() {navigate("/")} // back to home
-  function handleLoginClick() { // next page...
-    navigate("/graphs")
-  }
+  function handleLogin() { // next page...
 
-  function getUsername() {
-    console.log(document.getElementById("username").value)
+
+    navigate("/graphs")
   }
 
   return (
@@ -23,13 +24,15 @@ export default function Login() {
       </button>
 
       <div className = "prevent-drag center" id = "login-form">
-        <h2 className = "prevent-select">log in</h2>
+        <h2 className = "prevent-select prevent-drag">log in</h2>
 
-        <p>username</p>
+        <p className = "prevent-select prevent-drag">username</p>
         <input className = "inputs horizontal-center" type="text" id="username" name="username"></input>
 
-        <button className = "btn prevent-drag" id = "login-button" onClick = {getUsername}>log in</button>
+        <button className = "btn prevent-drag" id = "login-button" onClick = {handleLogin}>log in</button>
       </div>
+
+      <p className = "error-message" id = "login-error"></p>
     </div>
   )
 }

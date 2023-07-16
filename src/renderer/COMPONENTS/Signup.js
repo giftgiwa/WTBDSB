@@ -3,6 +3,8 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import '../App.css'
 import '../CSS/Signup.css'
 
+import { addUserData } from '../../backend/database.js'
+
 // signup page
 export default function Signup() {
 
@@ -12,14 +14,18 @@ export default function Signup() {
   }
 
   function handleUsername() {
-    // console.log(document.getElementById("username").value + " " + document.getElementById("confirm-username").value)
 
-    if (document.getElementById("username").value !== document.getElementById("confirm-username").value) {
-      console.log("Error: usernames don't match!")
-      document.getElementById("error-message").textContent = "Error: usernames don't match!"
+    // usernames don't match
+    if (document.getElementById("username").value != document.getElementById("confirm-username").value) {
+      document.getElementById("signup-error").textContent = "Error: usernames don't match!"
     }
-    let username = document.getElementById("username").value
-    writeUserData(username, username)
+
+    // usernames do match
+    else {
+      document.getElementById("signup-error").textContent = ""
+      let username = document.getElementById("username").value
+      addUserData(username.toLowerCase(), username)
+    }
   }
 
   return (
@@ -31,10 +37,10 @@ export default function Signup() {
       <div className = "prevent-drag center" id = "signup-form">
         <h2 className = "prevent-select">sign up</h2>
 
-        <p>username</p>
+        <p className = "prevent-select prevent-drag">username</p>
         <input className = "inputs horizontal-center" type="text" id="username" name="username"></input>
 
-        <p>confirm username</p>
+        <p className = "prevent-select prevent-drag">confirm username</p>
         <input className = "inputs horizontal-center" type="text" id="confirm-username" name="username"></input>
 
         {/* <p>password</p>
@@ -47,7 +53,7 @@ export default function Signup() {
 
 
       </div>
-      <p id = "error-message"></p>
+      <p className = "error-message" id = "signup-error"></p>
     </div>
   )
 }

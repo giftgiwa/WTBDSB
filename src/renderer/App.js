@@ -49,13 +49,26 @@ export default function App() {
   return (
     <>
       <TitleBar />
-      <Background />
+      {/* <Background /> */}
       <Router>
         <Routes>
 
-          <Route path="/" element={<Welcome />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/" element={<>
+            <Background />
+            <Welcome />
+          </>
+          } />
+
+          <Route path="/login" element={<>
+            <Background />
+            <Login />
+          </>} />
+
+          <Route path="/signup" element={<>
+            <Background />
+            <Signup />
+          </>} />
+          
           <Route path="/graphs" element={<Graphs />} />
 
         </Routes>
