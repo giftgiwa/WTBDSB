@@ -12,9 +12,11 @@ export default function Login() {
   const navigate = useNavigate()
   function handleClickBack() {navigate("/")} // back to home
   function handleLogin() { // next page...
-
-
-    navigate("/graphs")
+    let username = document.getElementById("username").value
+    let dataResult = getUserData(username.toLowerCase(), username)
+    if (dataResult === true) {
+      navigate("/graphs")
+    }
   }
 
   return (

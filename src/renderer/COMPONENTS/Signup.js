@@ -14,10 +14,9 @@ export default function Signup() {
   }
 
   function handleUsername() {
-
     // usernames don't match
     if (document.getElementById("username").value != document.getElementById("confirm-username").value) {
-      document.getElementById("signup-error").textContent = "Error: usernames don't match!"
+      document.getElementById("signup-error").textContent = "Usernames don't match!"
     }
 
     // usernames do match
