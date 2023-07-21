@@ -10,13 +10,16 @@ import { getUserData } from '../../backend/database.js'
 // login page
 export default function Login() {
   const navigate = useNavigate()
+
   function handleClickBack() {navigate("/")} // back to home
   function handleLogin() { // next page...
     let username = document.getElementById("username").value
-    let dataResult = getUserData(username.toLowerCase(), username)
-    if (dataResult === true) {
-      navigate("/graphs")
-    }
+    getUserData(username.toLowerCase(), username)
+    setTimeout(() => {
+      if (document.getElementById("login-error").textContent === "") {
+        navigate("/graphs")
+       }
+    }, 50)
   }
 
   return (
