@@ -14,12 +14,19 @@ export default function Login() {
   function handleClickBack() {navigate("/")} // back to home
   function handleLogin() { // next page...
     let username = document.getElementById("username").value
-    getUserData(username.toLowerCase(), username)
-    setTimeout(() => {
-      if (document.getElementById("login-error").textContent === "") {
-        navigate("/graphs")
-       }
-    }, 50)
+    if (username.length == 0) {
+      document.getElementById("login-error").textContent = "Error: please type a username."
+    } else {
+      document.getElementById("login-error").textContent = ""
+
+      getUserData(username.toLowerCase(), username)
+
+      setTimeout(() => {
+        if (document.getElementById("login-error").textContent === "") {
+          navigate("/graphs")
+        }
+      }, 100)
+    }
   }
 
   return (

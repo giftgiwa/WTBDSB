@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, set, child, get, onValue } from "firebase/database";
+import { getDatabase, ref, set, child, get } from "firebase/database";
 
 const firebaseConfig = {
   databaseURL: "https://wtbdsb-7d385-default-rtdb.firebaseio.com/",
@@ -13,6 +13,7 @@ const dbRef = ref(db)
 // write user data to Firebase database; to be called each time the sign up button is pressed
 export function addUserData(userId, name) {
   get(child(dbRef, `users/${userId}`)).then((snapshot) => {
+
     if (snapshot.exists()) { // username taken
       document.getElementById("signup-error").textContent = "Username has already been taken!"
     } else { // username not yet taken - add it to the database
@@ -27,18 +28,19 @@ export function addUserData(userId, name) {
 }
 
 // log user in via Firebase database; to be called each time the log in button is pressed
-export function getUserData(userId, name) {
-  console.log("userId " + userId)
+export function getUserData(userId) {
+  // console.log("userId " + userId)
   get(child(dbRef, `users/${userId}`)).then((snapshot) => {
-    // console.log(snapshot.val())
+    console.log("test")
     if (snapshot.exists()) { // username taken
-      console.log("exists")
+      console.log(snapshot.val());
+      // console.log("exists")
       document.getElementById("login-error").textContent = ""
-    } else { // username not yet taken - add it to the database
-      console.log("does not exist")
+    } else { // username does not exist
+      console.log("No data available")
       document.getElementById("login-error").textContent = "Username not found!"
     }
   }).catch((error) => { // error catching
-    // console.error(error) // ignore null textContent error
+    console.error(error) // ignore null textContent error
   })
 }
