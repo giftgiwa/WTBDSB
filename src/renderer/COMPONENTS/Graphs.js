@@ -2,8 +2,6 @@ import { useNavigate } from 'react-router'
 import ExitToAppIcon from '@mui/icons-material/ExitToApp'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 
-
-
 import '../App.css'
 import '../CSS/Graphs.css'
 
@@ -27,7 +25,6 @@ export default function Graphs() {
 
   let element = document.querySelector('#scene')
 
-
   const navigate = useNavigate();
   function handleExit() { // back to home
     navigate("/")
@@ -39,14 +36,13 @@ export default function Graphs() {
 
   return (
     <>
-      {/* back button */}
+      {/* back/logout button */}
       <button className = "small-btn prevent-drag" id = "return" onClick={handleExit}>
-        <ArrowBackIosNewIcon id = "go-home"></ArrowBackIosNewIcon>
+        <ExitToAppIcon id = "go-home"></ExitToAppIcon>
       </button>
-      {/* logout button */}
-      <button className = "small-btn prevent-drag" onClick={handleFullExit}>
-        <ExitToAppIcon id = "go-home-full"></ExitToAppIcon>
-      </button>
+
+      
+
       <div id = "scene"></div>
     </>
   )
