@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router'
+import Panzoom from '@panzoom/panzoom'
 import ExitToAppIcon from '@mui/icons-material/ExitToApp'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 
@@ -10,29 +11,41 @@ import '../CSS/Graphs.css'
 // panzoom(element)
 
 export default function Graphs() {
-  // append panzoom script to head tag in app
-  // useEffect(() => {
-  //   const head = document.querySelector("head");
-  //   const script = document.createElement("script");
-
-  //   script.setAttribute("src", "https://unpkg.com/panzoom@9.4.0/dist/panzoom.min.js");
-  //   head.appendChild(script);
-
-  //   return () => {
-  //     head.removeChild(script);
-  //   };
-  // });
-
-  let element = document.querySelector('#scene')
+  // const Panzoom = require('@panzoom/panzoom')
 
   const navigate = useNavigate();
-  function handleExit() { // back to home
+  function handleExit() { // back to home (log out)
     navigate("/")
   }
 
-  function handleFullExit() { // back to main page
+  const elem = document.getElementById("panzoom-element")
+  setTimeout(() => {
+    if (elem) console.log(elem)
 
-  }
+     const panzoom = Panzoom(document.getElementById('panzoom-element'), {
+      maxScale: 5
+    })
+    panzoom.pan(10, 10)
+    panzoom.zoom(2, { animate: true })
+
+
+    // button.addEventListener('click', panzoom.zoomIn)
+    document.getElementById('panzoom-element').parentElement.addEventListener('wheel', panzoom.zoomWithWheel)
+
+  }, 100)
+  // const panzoom = Panzoom(document.getElementById('panzoom-element'), {
+  //   maxScale: 5
+  // })
+  // panzoom.pan(10, 10)
+  // panzoom.zoom(2, { animate: true })
+
+
+  // button.addEventListener('click', panzoom.zoomIn)
+  // document.getElementById('panzoom-element').parentElement.addEventListener('wheel', panzoom.zoomWithWheel)
+
+  // function handleFullExit() { // back to main page
+
+  // }
 
   return (
     <>
@@ -41,9 +54,8 @@ export default function Graphs() {
         <ExitToAppIcon id = "go-home"></ExitToAppIcon>
       </button>
 
-      
-
-      <div id = "scene"></div>
+      <div id = "panzoom-element"></div>
+      {/* <div id = "scene"></div> */}
     </>
   )
 }

@@ -16,14 +16,29 @@ export default function Signup() {
   function handleUsername() {
     // usernames don't match
     if (document.getElementById("username").value != document.getElementById("confirm-username").value) {
-      document.getElementById("signup-error").textContent = "Usernames don't match!"
+      document.getElementById("signup-message").textContent = "Usernames don't match!"
     }
 
-    // usernames do match
-    else {
-      document.getElementById("signup-error").textContent = ""
+    // empty username entry
+    if (document.getElementById("username").value.length == 0) {
+      document.getElementById("signup-message").textContent = "Error: please type a username."
+    } else {
+      // usernames don't match
+      if (document.getElementById("username").value != document.getElementById("confirm-username").value) {
+        document.getElementById("signup-message").textContent = "Usernames don't match!"
+      }
+      document.getElementById("signup-message").textContent = ""
       let username = document.getElementById("username").value
       addUserData(username.toLowerCase(), username)
+
+      setTimeout(() => {
+        if (document.getElementById("signup-message").textContent === "Success!") {
+          console.log("navigating to home")
+          setTimeout(() => {
+            navigate("/") // move back home on successful signup
+          }, 400)
+        }
+      }, 50)
     }
   }
 
@@ -52,7 +67,7 @@ export default function Signup() {
 
 
       </div>
-      <p className = "error-message" id = "signup-error"></p>
+      <p className = "error-message" id = "signup-message"></p>
     </div>
   )
 }
