@@ -1,36 +1,36 @@
-/* eslint-disable react/self-closing-comp */
-/* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable react/button-has-type */
-/* eslint-disable camelcase */
-/* eslint-disable import/order */
-/* eslint-disable prettier/prettier */
-import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
+import { MemoryRouter as Router, Routes, Route } from 'react-router-dom'
 import { useNavigate } from 'react-router'
 
 import perspective_grid from '../../assets/images/perspective_grid.jpg'
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import TitleBar from './COMPONENTS/title_bar.js'
+import Login from './COMPONENTS/Login.js'
+import Signup from './COMPONENTS/Signup.js'
+import Graphs from './COMPONENTS/Graphs.js'
 
-import './App.css'
 import './CSS/Home.css'
-import './CSS/Login.css'
-import './CSS/Signup.css'
+import './App.css'
 
 
-// grid background with overlaying gradient
+// switch "exit" button in accordance with whether the user is logged in or not.
+let loggedIn = false
+
+// grid background with overlaying white gradient
 function Background() {
   return (
     <div id = "background">
-      <img className = "prevent-select prevent-drag absolute" id = "perspective-grid" src={perspective_grid}></img>
+      <img className = "prevent-select prevent-drag absolute" id = "perspective-grid" draggable="false" src={perspective_grid}></img>
     </div>
   )
 }
 
 // welcome page (with login and signup buttons)
 function Welcome() {
+
+  // writing it like this was the only way i could get it working...
   const navigate = useNavigate()
   function handleLoginClick() {navigate("/login")} // to login
   function handleSignupClick() {navigate("/signup")} // to signup
+  function handleGuestClick() {navigate("/graphs")} // to graphs page
 
   return (
     <div id = "welcome">
@@ -39,57 +39,7 @@ function Welcome() {
 
       <button className = "btn prevent-drag" id = "login" onClick={handleLoginClick}>log in</button>
       <button className = "btn prevent-drag" id = "signup" onClick={handleSignupClick}>sign up</button>
-      <button className = "btn prevent-drag" id = "guest">continue as guest</button>
-    </div>
-  )
-}
-
-// login page
-function Login() {
-  const navigate = useNavigate()
-  function handleClickBack() {navigate("/")} // back to home
-  // function handleLoginClick() {navigate("/graphs")} // next page...
-
-
-  return (
-    <div  id = "LOGIN">
-      <button className = "small-btn prevent-drag" id = "back" onClick={handleClickBack}>
-        <ArrowBackIosNewIcon id = "arrow-back"></ArrowBackIosNewIcon>
-      </button>
-
-      <div className = "prevent-drag center" id = "login-form">
-        <h2 className = "prevent-select">log in</h2>
-
-        <p>username</p>
-        <input className = "inputs horizontal-center" type="text" id="username" name="username"></input>
-
-        <button className = "btn prevent-drag" id = "login-button">log in</button>
-
-
-      </div>
-    </div>
-  )
-}
-
-// signup page
-function Signup() {
-
-  const navigate = useNavigate();
-  function handleClick() { // back to home
-    navigate("/");
-  }
-  return (
-    <div id = "SIGNUP">
-      <button className = "small-btn prevent-drag" id = "back" onClick={handleClick}>
-        <ArrowBackIosNewIcon id = "arrow-back"></ArrowBackIosNewIcon>
-      </button>
-
-      <div className = "prevent-drag center" id = "signup-form">
-
-
-      </div>
-
-
+      <button className = "btn prevent-drag" id = "guest" onClick={handleGuestClick}>continue as guest</button>
     </div>
   )
 }
@@ -99,13 +49,27 @@ export default function App() {
   return (
     <>
       <TitleBar />
-      <Background />
+      {/* <Background /> */}
       <Router>
         <Routes>
 
-          <Route path="/" element={<Welcome />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/" element={<>
+            <Background />
+            <Welcome />
+          </>
+          } />
+
+          <Route path="/login" element={<>
+            <Background />
+            <Login />
+          </>} />
+
+          <Route path="/signup" element={<>
+            <Background />
+            <Signup />
+          </>} />
+          
+          <Route path="/graphs" element={<Graphs />} />
 
         </Routes>
       </Router>

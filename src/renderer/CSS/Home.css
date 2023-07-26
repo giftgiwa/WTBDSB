@@ -3,13 +3,6 @@
     src: url("../../../assets/fonts/Microgramma D Extended Bold.otf")
 }
 
-#background {
-    background: linear-gradient(180deg, #FFFFFF 50%, rgba(255, 255, 255, 0) 100%);
-    width: 100vw;
-    height: 100vh;
-    margin:0;
-}
-
 /* "wants to be desmos so bad" text */
 #subtitle {
     width: 100%;
@@ -21,15 +14,7 @@
     position: relative;
 }
 
-
 /* CSS rules for the Home div and Welcome div included in this file */
-
-#background {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    
-}
 
 #welcome {
     position: absolute;
@@ -45,9 +30,4 @@
 #title {
     margin-top: 30px;
     margin-bottom: 30px;
-}
-
-#root {
-    width: 100%;
-    height: 600px;
 }
