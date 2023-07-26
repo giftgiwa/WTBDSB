@@ -9,42 +9,44 @@ import { addUserData } from '../../backend/database.js'
 export default function Signup() {
 
   const navigate = useNavigate();
-  function handleClick() { // back to home
+  function handleClickBack() { // back to home
     navigate("/")
   }
 
   function handleUsername() {
     // usernames don't match
+    console.log("username: " + document.getElementById("username").value + "\nconfirm username: " + document.getElementById("confirm-username").value)
     if (document.getElementById("username").value != document.getElementById("confirm-username").value) {
       document.getElementById("signup-message").textContent = "Usernames don't match!"
     }
-
-    // empty username entry
-    if (document.getElementById("username").value.length == 0) {
-      document.getElementById("signup-message").textContent = "Error: please type a username."
-    } else {
-      // usernames don't match
-      if (document.getElementById("username").value != document.getElementById("confirm-username").value) {
-        document.getElementById("signup-message").textContent = "Usernames don't match!"
-      }
-      document.getElementById("signup-message").textContent = ""
-      let username = document.getElementById("username").value
-      addUserData(username.toLowerCase(), username)
-
-      setTimeout(() => {
-        if (document.getElementById("signup-message").textContent === "Success!") {
-          console.log("navigating to home")
-          setTimeout(() => {
-            navigate("/") // move back home on successful signup
-          }, 400)
+    else {
+      // empty username entry
+      if (document.getElementById("username").value.length == 0) {
+        document.getElementById("signup-message").textContent = "Error: please type a username."
+      } else {
+        // usernames don't match
+        if (document.getElementById("username").value != document.getElementById("confirm-username").value) {
+          document.getElementById("signup-message").textContent = "Usernames don't match!"
         }
-      }, 50)
+        document.getElementById("signup-message").textContent = ""
+        let username = document.getElementById("username").value
+        addUserData(username.toLowerCase(), username)
+
+        setTimeout(() => {
+          if (document.getElementById("signup-message").textContent === "Success!") {
+            console.log("navigating to home")
+            setTimeout(() => {
+              navigate("/") // move back home on successful signup
+            }, 400)
+          }
+        }, 50)
+      }
     }
   }
 
   return (
     <div id = "SIGNUP">
-      <button className = "small-btn prevent-drag" id = "back" onClick={handleClick}>
+      <button className = "small-btn prevent-drag" id = "back" onClick={handleClickBack}>
         <ArrowBackIosNewIcon id = "arrow-back"></ArrowBackIosNewIcon>
       </button>
 
