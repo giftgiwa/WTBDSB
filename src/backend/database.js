@@ -29,10 +29,10 @@ export function addUserData(userId, name) {
 }
 
 // log user in via Firebase database; to be called each time the log in button is pressed
-export function getUserData(userId) {
+export async function getUserData(userId) {
   get(child(dbRef, `users/${userId}`)).then((snapshot) => {
 
-    if (snapshot.exists()) { // username taken
+    if (snapshot.exists()) { // username exists
       document.getElementById("login-message").textContent = ""
     } else { // username does not exist
       document.getElementById("login-message").textContent = "Username not found!"
