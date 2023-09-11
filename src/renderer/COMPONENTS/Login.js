@@ -5,30 +5,34 @@ import '../App.css'
 
 import { getUserData } from '../../backend/database.js'
 
-// document.getElementById("login-button").disabled = true;
-
 // login page
 export default function Login() {
 
   const navigate = useNavigate()
   function handleClickBack() {navigate("/")} // back to home
 
-  async function handleLogin() { // next page...
+  async function handleLogin() {
     let username = document.getElementById("username").value
     if (username.length == 0) {
+      document.getElementById("login-message").style.color = "F54242"
       document.getElementById("login-message").textContent = "Error: please type a username."
     } else {
       await getUserData(username.toLowerCase())
+      console.log('test text')
 
-      if (document.getElementById("login-message").textContent === "") {
-        document.getElementById("login-message").style.color = "#17AD00" // change text color to green for successful login
-        document.getElementById("login-message").textContent = "Success!"
+      // handleLogin()
+      setTimeout(() => {
+        if (document.getElementById("login-message").textContent == "Success!") {
+          console.log('success!')
 
-        // error handling: disable the button before moving to the next page.
-        // document.getElementById("login-button").disabled = true;
+          // // error handling: disable the button before moving to the next page.
+          // document.getElementById("login-button").disabled = true
+          setTimeout(() => {
+            navigate("/graphs")
+          }, 200)
+        }
+      }, 500)
 
-        navigate("/graphs")
-      }
     }
   }
 

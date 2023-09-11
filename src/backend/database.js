@@ -33,9 +33,14 @@ export async function getUserData(userId) {
   get(child(dbRef, `users/${userId}`)).then((snapshot) => {
 
     if (snapshot.exists()) { // username exists
-      document.getElementById("login-message").textContent = ""
+      // document.getElementById("login-message").textContent = ""
+      document.getElementById("login-message").style.color = "#17AD00" // change text color to green for successful login
+      document.getElementById("login-message").textContent = "Success!"
+
+      return
     } else { // username does not exist
       document.getElementById("login-message").textContent = "Username not found!"
+      return
     }
   }).catch((error) => { // error catching
     console.error(error) // ignore null textContent error
