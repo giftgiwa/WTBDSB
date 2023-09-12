@@ -11,7 +11,7 @@ const db = getDatabase() // database reference
 const dbRef = ref(db)
 
 // write user data to Firebase database; to be called each time the sign up button is pressed
-export function addUserData(userId, name) {
+export function addUserData(userId) {
   get(child(dbRef, `users/${userId}`)).then((snapshot) => {
     if (snapshot.exists()) { // username taken
       document.getElementById("signup-message").style.color = "#FF4646"
@@ -20,7 +20,19 @@ export function addUserData(userId, name) {
       document.getElementById("signup-message").textContent = "Success!"
       document.getElementById("signup-message").style.color = "#17AD00" // change text color to green for successful signup
       set(ref(db, 'users/' + userId), {
-        username: name,
+        username: userId,
+        graphs: {
+          space2D: {
+            points: [],
+            lines: [],
+            curves: [],
+          },
+          space3D: {
+            points: [],
+            lines: [],
+            curves: [],
+          }
+        }
       })
     }
   }).catch((error) => { // error catching
@@ -33,7 +45,6 @@ export async function getUserData(userId) {
   get(child(dbRef, `users/${userId}`)).then((snapshot) => {
 
     if (snapshot.exists()) { // username exists
-      // document.getElementById("login-message").textContent = ""
       document.getElementById("login-message").style.color = "#17AD00" // change text color to green for successful login
       document.getElementById("login-message").textContent = "Success!"
 

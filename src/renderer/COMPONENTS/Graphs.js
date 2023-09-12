@@ -33,7 +33,7 @@ let Canvas = props => {
 
     // add sample text to the canvas (just as a test)
     ctx.fillStyle = "#fff"
-    drawText("canvas test", 400, 300, 20, "courier")
+    drawText("AAAAA", 400, 300, 20, "courier")
   })
 
   return <canvas ref={canvasRef} {...props}/>

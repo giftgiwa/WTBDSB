@@ -17,22 +17,17 @@ export default function Login() {
       document.getElementById("login-message").style.color = "F54242"
       document.getElementById("login-message").textContent = "Error: please type a username."
     } else {
-      await getUserData(username.toLowerCase())
-      console.log('test text')
-
-      // handleLogin()
+      await getUserData(username)
       setTimeout(() => {
-        if (document.getElementById("login-message").textContent == "Success!") {
-          console.log('success!')
+        if (document.getElementById("login-message").textContent === "Success!") {
 
           // // error handling: disable the button before moving to the next page.
-          // document.getElementById("login-button").disabled = true
+          document.getElementById("login-button").disabled = true
           setTimeout(() => {
             navigate("/graphs")
           }, 200)
         }
       }, 500)
-
     }
   }
 

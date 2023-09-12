@@ -30,14 +30,15 @@ export default function Signup() {
         }
         document.getElementById("signup-message").textContent = ""
         let username = document.getElementById("username").value
-        addUserData(username.toLowerCase(), username)
+        addUserData(username)
 
         setTimeout(() => {
           if (document.getElementById("signup-message").textContent === "Success!") {
+            document.getElementById("signup-button").disabled = true
             console.log("navigating to home")
             setTimeout(() => {
               navigate("/") // move back home on successful signup
-            }, 400)
+            }, 200)
           }
         }, 50)
       }
@@ -58,12 +59,6 @@ export default function Signup() {
 
         <p className = "prevent-select prevent-drag">confirm username</p>
         <input className = "inputs horizontal-center" type="text" id="confirm-username" name="username"></input>
-
-        {/* <p>password</p>
-        <input className = "inputs horizontal-center" type="text" id="username" name="username"></input>
-
-        <p>confirm password</p>
-        <input className = "inputs horizontal-center" type="text" id="username" name="username"></input> */}
 
         <button className = "btn prevent-drag" id = "signup-button" onClick = {handleUsername}>sign up</button>
 
