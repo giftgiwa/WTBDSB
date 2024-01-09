@@ -1,9 +1,10 @@
 import { useNavigate } from 'react-router'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
-import '../CSS/Login.css'
+import '../css/Login.css'
 import '../App.css'
+import { dbRef } from '../../backend/database.js'
+import { child, get } from "firebase/database"
 
-import { getUserData } from '../../backend/database.js'
 
 // login page
 export default function Login() {
@@ -17,17 +18,28 @@ export default function Login() {
       document.getElementById("login-message").style.color = "F54242"
       document.getElementById("login-message").textContent = "Error: please type a username."
     } else {
-      await getUserData(username)
-      setTimeout(() => {
-        if (document.getElementById("login-message").textContent === "Success!") {
 
-          // // error handling: disable the button before moving to the next page.
-          document.getElementById("login-button").disabled = true
-          setTimeout(() => {
-            navigate("/graphs")
-          }, 200)
+      await get(child(dbRef, `users/${username}`)).then((snapshot) => {
+
+        if (snapshot.exists()) { // username exists
+          document.getElementById("login-message").style.color = "#17AD00" // change text color to green for successful login
+          document.getElementById("login-message").textContent = "Success!"
+
+        } else { // username does not exist
+          document.getElementById("login-message").textContent = "Username not found!"
         }
-      }, 500)
+      }).catch((error) => { // error catching
+        console.error(error) // ignore null textContent error
+      })
+
+      if (document.getElementById("login-message").textContent === "Success!") {
+
+        // // error handling: disable the button before moving to the next page.
+        document.getElementById("login-button").disabled = true
+        setTimeout(() => {
+          navigate("/graphs")
+        }, 200)
+      }
     }
   }
 

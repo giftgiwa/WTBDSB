@@ -3,7 +3,7 @@ import { useRef, useEffect } from 'react'
 // import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch"
 import ExitToAppIcon from '@mui/icons-material/ExitToApp'
 import '../App.css'
-import '../CSS/Graphs.css'
+import '../css/Graphs.css'
 
 
 let Canvas = props => {
@@ -33,7 +33,7 @@ let Canvas = props => {
 
     // add sample text to the canvas (just as a test)
     ctx.fillStyle = "#fff"
-    drawText("AAAAA", 400, 300, 20, "courier")
+    drawText("canvas test text", 400, 300, 20, "courier")
   })
 
   return <canvas ref={canvasRef} {...props}/>
