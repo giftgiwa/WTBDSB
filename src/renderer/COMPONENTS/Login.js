@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import '../css/Login.css'
 import '../App.css'
-import { dbRef } from '../../backend/database.js'
+import { dbRef, currentUser } from '../../backend/database.js'
 import { child, get } from "firebase/database"
 
 
@@ -20,7 +20,6 @@ export default function Login() {
     } else {
 
       await get(child(dbRef, `users/${username}`)).then((snapshot) => {
-
         if (snapshot.exists()) { // username exists
           document.getElementById("login-message").style.color = "#17AD00" // change text color to green for successful login
           document.getElementById("login-message").textContent = "Success!"
@@ -33,9 +32,11 @@ export default function Login() {
       })
 
       if (document.getElementById("login-message").textContent === "Success!") {
-
-        // // error handling: disable the button before moving to the next page.
+        // disable the button before moving to the next page
         document.getElementById("login-button").disabled = true
+
+        currentUser[0] = username // set currentUser variable - data will be written to here upon login
+
         setTimeout(() => {
           navigate("/graphs")
         }, 200)

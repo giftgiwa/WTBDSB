@@ -43,7 +43,7 @@ export default function Signup() {
               username: username,
               graphs: {
                 space2D: {
-                  points: [],
+                  points: [1, 2, 3],
                   lines: [],
                   curves: [],
                 },

@@ -9,3 +9,4 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig) // initialize Firebase
 export const db = getDatabase() // database reference
 export const dbRef = ref(db)
+export const currentUser = [""] // store the user that data gets written to in the app
