@@ -7,32 +7,30 @@ import '../css/Graphs.css'
 import { currentUser } from '../../backend/database.js'
 import { SVG } from '@svgdotjs/svg.js'
 
-// tentative
+
+/*
 let Canvas = props => {
   const canvasRef = useRef(null)
 
   useEffect(() => {
     const canvas = document.getElementById("canvas")
     const ctx = canvas.getContext('2d')
-
     canvas.width = window.innerWidth
     canvas.height = window.innerHeight
-
     function drawText(text, x, y, size, font) {
       ctx.font = `${size}px ${font}`
       ctx.fillText(text, x, y)
     }
 
-    // color the canvas gray
     ctx.fillStyle = '#2f2f2f'
     ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height)
 
-    // add sample text to the canvas (just as a test)
     ctx.fillStyle = "#fff"
     drawText("canvas test text", 400, 300, 20, "courier")
   })
   return <canvas ref={canvasRef} {...props}/>
 }
+*/
 
 /*
 const Controls = () => {
@@ -49,12 +47,14 @@ const Controls = () => {
 
 const GraphPaper = () => {
 
-  let draw = SVG().addTo('#GRAPHS')
-  draw.rect(100, 100).move(100, 50).fill('#f06')
+  // the div for the graphs takes a bit of time to render.
 
 
   return (
     <div id = "graph-paper">
+      <svg height="210" width="500">
+        <line x1="0" y1="0" x2="200" y2="200" id = "gridline"/>
+      </svg>
 
     </div>
   )
@@ -70,6 +70,14 @@ export default function Graphs() {
     navigate("/")
   }
 
+  setTimeout(() => {
+    console.log(document.getElementById("GRAPHS"))
+
+
+
+  }, 100)
+
+
   return (
     <div id="GRAPHS">
       {/* back/logout button */}
@@ -78,7 +86,6 @@ export default function Graphs() {
       </button>
 
       <GraphPaper></GraphPaper>
-
 
       {/* <TransformWrapper className = "transform-box">
       <Controls />
