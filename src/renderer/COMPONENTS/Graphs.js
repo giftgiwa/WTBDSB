@@ -1,10 +1,11 @@
 import { useNavigate } from 'react-router'
 import { useRef, useEffect } from 'react'
-import { TransformWrapper, TransformComponent, useControls } from "react-zoom-pan-pinch"
+// import { TransformWrapper, TransformComponent, useControls } from "react-zoom-pan-pinch"
 import ExitToAppIcon from '@mui/icons-material/ExitToApp'
 import '../App.css'
 import '../css/Graphs.css'
 import { currentUser } from '../../backend/database.js'
+import { SVG } from '@svgdotjs/svg.js'
 
 // tentative
 let Canvas = props => {
@@ -30,20 +31,35 @@ let Canvas = props => {
     ctx.fillStyle = "#fff"
     drawText("canvas test text", 400, 300, 20, "courier")
   })
-
   return <canvas ref={canvasRef} {...props}/>
 }
 
+/*
 const Controls = () => {
   const { zoomIn, zoomOut, resetTransform } = useControls();
   return (
     <>
-      <button onClick={() => zoomIn()}>Zoom In</button>
-      <button onClick={() => zoomOut()}>Zoom Out</button>
-      <button onClick={() => resetTransform()}>Reset</button>
+      <button className = "controls-button" onClick={() => zoomIn()}>Zoom In</button>
+      <button className = "controls-button" onClick={() => zoomOut()}>Zoom Out</button>
+      <button className = "controls-button" onClick={() => resetTransform()}>Reset</button>
     </>
   );
 };
+*/
+
+const GraphPaper = () => {
+
+  let draw = SVG().addTo('#GRAPHS')
+  draw.rect(100, 100).move(100, 50).fill('#f06')
+
+
+  return (
+    <div id = "graph-paper">
+
+    </div>
+  )
+}
+
 
 
 
@@ -55,15 +71,17 @@ export default function Graphs() {
   }
 
   return (
-    <>
+    <div id="GRAPHS">
       {/* back/logout button */}
       <button className = "small-btn prevent-drag" id = "return" onClick={handleExit}>
         <ExitToAppIcon id = "go-home"></ExitToAppIcon>
       </button>
 
+      <GraphPaper></GraphPaper>
 
-      <TransformWrapper>
-        <Controls />
+
+      {/* <TransformWrapper className = "transform-box">
+      <Controls />
         <TransformComponent>
           <img
             src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
@@ -71,7 +89,7 @@ export default function Graphs() {
             width="100%"
           />
         </TransformComponent>
-      </TransformWrapper>
+      </TransformWrapper> */}
 
       {/* <div className="svgtest">
       <svg
@@ -89,6 +107,6 @@ export default function Graphs() {
       {/* experimental (subject to change) */}
       {/* <Canvas id = "canvas"></Canvas> */}
 
-    </>
+    </div>
   )
 }
