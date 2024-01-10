@@ -46,15 +46,56 @@ const Controls = () => {
 */
 
 const GraphPaper = () => {
+  const svgRef = useRef(null);
+
+  useEffect(() => {
+    const svg = svgRef.current;
+
+    // Define the size and number of rows and columns
+    const gridSize = 800;
+    const numRows = 50;
+    const numCols = 50;
+
+    // Calculate cell size based on the grid size
+    const cellSize = gridSize / numRows;
+
+    // Create grid lines
+    for (let i = 0; i < numRows; i++) {
+      const y = i * cellSize;
+
+      // Horizontal lines
+      const horizontalLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      horizontalLine.setAttribute('x1', '0');
+      horizontalLine.setAttribute('y1', y);
+      horizontalLine.setAttribute('x2', gridSize.toString());
+      horizontalLine.setAttribute('y2', y);
+      horizontalLine.setAttribute('stroke', 'black');
+      horizontalLine.setAttribute('stroke-width', '1');
+      svg.appendChild(horizontalLine);
+    }
+
+
+    for (let j = 0; j < numCols; j++) {
+      const x = j * cellSize;
+
+      // Vertical lines
+      const verticalLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      verticalLine.setAttribute('x1', x);
+      verticalLine.setAttribute('y1', '0');
+      verticalLine.setAttribute('x2', x);
+      verticalLine.setAttribute('y2', gridSize.toString());
+      verticalLine.setAttribute('stroke', 'black');
+      verticalLine.setAttribute('stroke-width', '1');
+      svg.appendChild(verticalLine);
+    }
+  }, []);
 
   // the div for the graphs takes a bit of time to render.
 
-
   return (
     <div id = "graph-paper">
-      <svg height="210" width="500">
-        <line x1="0" y1="0" x2="200" y2="200" id = "gridline"/>
-      </svg>
+      <svg id = "grid" ref={svgRef} width="800" height="600" style={{ border: '1px solid black' }}></svg>
+
 
     </div>
   )
