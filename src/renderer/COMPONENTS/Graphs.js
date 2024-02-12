@@ -1,43 +1,84 @@
 import { useNavigate } from 'react-router'
 import { useRef, useEffect } from 'react'
-// import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch"
 import ExitToAppIcon from '@mui/icons-material/ExitToApp'
 import '../App.css'
-import '../CSS/Graphs.css'
+import '../css/Graphs.css'
+import { currentUser } from '../../backend/database.js'
+// import { SVG } from '@svgdotjs/svg.js'
+// import { svgPanZoom } from '~svg-pan-zoom'
 
 
-let Canvas = props => {
-  const canvasRef = useRef(null)
+const $ = require('jquery')
+const svgPanZoom = require('svg-pan-zoom')
+
+
+const GraphPaper = () => {
+  const svgRef = useRef(null);
 
   useEffect(() => {
-    const canvas = canvasRef.current
-    const ctx = canvas.getContext('2d')
+    const svg = svgRef.current;
 
-    let cameraOffset = { x: window.innerWidth/2, y: window.innerHeight/2 }
-    let cameraZoom = 1
-    let MAX_ZOOM = 5
-    let MIN_ZOOM = 0.1
-    let SCROLL_SENSITIVITY = 0.0005
+    // Define the size and number of rows and columns
+    const gridSize = 1200;
+    const numRows = 40;
+    const numCols = 40;
 
-    canvas.width = window.innerWidth
-    canvas.height = window.innerHeight
+    // Calculate cell size based on the grid size
+    const cellSize = gridSize / numRows;
 
-    function drawText(text, x, y, size, font) {
-      ctx.font = `${size}px ${font}`
-      ctx.fillText(text, x, y)
+    // Create grid lines
+    for (let i = 0; i < numRows; i++) {
+      const y = i * cellSize;
+
+      // Horizontal lines
+      const horizontalLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      horizontalLine.setAttribute('x1', '0');
+      horizontalLine.setAttribute('y1', y);
+      horizontalLine.setAttribute('x2', gridSize.toString());
+      horizontalLine.setAttribute('y2', y);
+      horizontalLine.setAttribute('stroke', 'rgba(0, 0, 0, 0.1)');
+      horizontalLine.setAttribute('stroke-width', '1');
+      svg.appendChild(horizontalLine);
     }
 
-    // color the canvas gray
-    ctx.fillStyle = '#2f2f2f'
-    ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height)
 
-    // add sample text to the canvas (just as a test)
-    ctx.fillStyle = "#fff"
-    drawText("canvas test", 400, 300, 20, "courier")
-  }, [])
+    for (let j = 0; j < numCols; j++) {
+      const x = j * cellSize;
 
-  return <canvas ref={canvasRef} {...props}/>
+      // Vertical lines
+      const verticalLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      verticalLine.setAttribute('x1', x);
+      verticalLine.setAttribute('y1', '0');
+      verticalLine.setAttribute('x2', x);
+      verticalLine.setAttribute('y2', gridSize.toString());
+      verticalLine.setAttribute('stroke', 'rgba(0, 0, 0, 0.1)');
+      verticalLine.setAttribute('stroke-width', '1');
+      svg.appendChild(verticalLine);
+    }
+  }, []);
+
+  $(document).ready(function() {
+    // console.log("document ready!")
+    console.log(document.getElementById("GRAPHS"))
+
+    let panZoomGrid = svgPanZoom('#grid');
+
+
+  })
+
+  // the div for the graphs takes a bit of time to render.
+
+  return (
+    <div id = "graph-paper">
+      {/* <svg id = "grid" ref={svgRef} width="800" height="600" style={{ border: '1px solid black' }}></svg> */}
+      <svg id = "grid" ref={svgRef} width="1200" height="1200"></svg>
+
+
+    </div>
+  )
 }
+
+
 
 
 export default function Graphs() {
@@ -47,131 +88,20 @@ export default function Graphs() {
     navigate("/")
   }
 
-  /*
+  // setTimeout(() => {
+  //   console.log(document.getElementById("GRAPHS"))
+  // }, 100)
 
-  let canvas = document.getElementById("canvas")
-  let ctx = canvas.getContext('2d')
-
-  let cameraOffset = { x: window.innerWidth/2, y: window.innerHeight/2 }
-  let cameraZoom = 1
-  let MAX_ZOOM = 5
-  let MIN_ZOOM = 0.1
-  let SCROLL_SENSITIVITY = 0.0005
-
-  // Gets the relevant location from a mouse or single touch event
-  function getEventLocation(e) {
-      if (e.touches && e.touches.length == 1) {
-          return { x:e.touches[0].clientX, y: e.touches[0].clientY }
-      }
-      else if (e.clientX && e.clientY) {
-          return { x: e.clientX, y: e.clientY }
-      }
-  }
-
-  function drawRect(x, y, width, height) {
-      ctx.fillRect( x, y, width, height )
-  }
-
-  function drawText(text, x, y, size, font) {
-      ctx.font = `${size}px ${font}`
-      ctx.fillText(text, x, y)
-  }
-
-  let isDragging = false
-  let dragStart = { x: 0, y: 0 }
-
-  function onPointerDown(e) {
-      isDragging = true
-      dragStart.x = getEventLocation(e).x/cameraZoom - cameraOffset.x
-      dragStart.y = getEventLocation(e).y/cameraZoom - cameraOffset.y
-  }
-
-  function onPointerUp(e)
-  {
-      isDragging = false
-      initialPinchDistance = null
-      lastZoom = cameraZoom
-  }
-
-  function onPointerMove(e)
-  {
-      if (isDragging)
-      {
-          cameraOffset.x = getEventLocation(e).x/cameraZoom - dragStart.x
-          cameraOffset.y = getEventLocation(e).y/cameraZoom - dragStart.y
-      }
-  }
-
-  function handleTouch(e, singleTouchHandler) {
-    if ( e.touches.length == 1 ) {
-        singleTouchHandler(e)
-    }
-    else if (e.type == "touchmove" && e.touches.length == 2) {
-        isDragging = false
-        handlePinch(e)
-    }
-  }
-
-  let initialPinchDistance = null
-  let lastZoom = cameraZoom
-
-  function handlePinch(e) {
-    e.preventDefault()
-
-    let touch1 = { x: e.touches[0].clientX, y: e.touches[0].clientY }
-    let touch2 = { x: e.touches[1].clientX, y: e.touches[1].clientY }
-
-    // This is distance squared, but no need for an expensive sqrt as it's only used in ratio
-    let currentDistance = (touch1.x - touch2.x)**2 + (touch1.y - touch2.y)**2
-
-    if (initialPinchDistance == null) {
-      initialPinchDistance = currentDistance
-    } else {
-      adjustZoom( null, currentDistance/initialPinchDistance )
-    }
-  }
-
-  function adjustZoom(zoomAmount, zoomFactor) {
-    if (!isDragging) {
-      if (zoomAmount) {
-        cameraZoom += zoomAmount
-      } else if (zoomFactor) {
-        console.log(zoomFactor)
-        cameraZoom = zoomFactor*lastZoom
-      }
-
-      cameraZoom = Math.min( cameraZoom, MAX_ZOOM )
-      cameraZoom = Math.max( cameraZoom, MIN_ZOOM )
-      console.log(zoomAmount)
-    }
-  }
-
-  canvas.addEventListener('mousedown', onPointerDown)
-  canvas.addEventListener('touchstart', (e) => handleTouch(e, onPointerDown))
-  canvas.addEventListener('mouseup', onPointerUp)
-  canvas.addEventListener('touchend',  (e) => handleTouch(e, onPointerUp))
-  canvas.addEventListener('mousemove', onPointerMove)
-  canvas.addEventListener('touchmove', (e) => handleTouch(e, onPointerMove))
-  canvas.addEventListener( 'wheel', (e) => adjustZoom(e.deltaY*SCROLL_SENSITIVITY))
-
-  // Ready, set, go
-  draw()
-
-*/
 
   return (
-    <>
+    <div id="GRAPHS">
       {/* back/logout button */}
       <button className = "small-btn prevent-drag" id = "return" onClick={handleExit}>
         <ExitToAppIcon id = "go-home"></ExitToAppIcon>
       </button>
 
-      <Canvas id = "canvas"></Canvas> {/* defined above */}
-      {/*
-      <div id = "panzoom-element"></div>
-      */}
+      <GraphPaper></GraphPaper>
 
-
-    </>
+    </div>
   )
 }

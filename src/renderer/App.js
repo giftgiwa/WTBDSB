@@ -1,13 +1,11 @@
 import { MemoryRouter as Router, Routes, Route } from 'react-router-dom'
 import { useNavigate } from 'react-router'
-
 import perspective_grid from '../../assets/images/perspective_grid.jpg'
-import TitleBar from './COMPONENTS/title_bar.js'
-import Login from './COMPONENTS/Login.js'
-import Signup from './COMPONENTS/Signup.js'
-import Graphs from './COMPONENTS/Graphs.js'
-
-import './CSS/Home.css'
+import TitleBar from './components/title_bar.js'
+import Login from './components/Login.js'
+import Signup from './components/Signup.js'
+import Graphs from './components/Graphs.js'
+import './css/Home.css'
 import './App.css'
 
 
@@ -68,7 +66,7 @@ export default function App() {
             <Background />
             <Signup />
           </>} />
-          
+
           <Route path="/graphs" element={<Graphs />} />
 
         </Routes>

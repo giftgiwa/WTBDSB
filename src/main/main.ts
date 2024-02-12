@@ -90,7 +90,7 @@ const createWindow = async () => {
     fullscreen: false,
     maximizable: false
   });
-  
+
 
   mainWindow.loadURL(resolveHtmlPath('index.html'));
 
@@ -108,6 +108,8 @@ const createWindow = async () => {
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
+
+  // mainWindow.$ = mainWindow.jQuery = require('jquery');
 
   const menuBuilder = new MenuBuilder(mainWindow);
   menuBuilder.buildMenu();

@@ -1,42 +1,46 @@
 import { useNavigate } from 'react-router'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
-import '../CSS/Login.css'
+import '../css/Login.css'
 import '../App.css'
+import { dbRef, currentUser } from '../../backend/database.js'
+import { child, get } from "firebase/database"
 
-import { getUserData } from '../../backend/database.js'
-
-// document.getElementById("login-button").disabled = true;
 
 // login page
 export default function Login() {
-  // setTimeout(() => {
-  //   console.log(document.getElementById("login-button"))
-  // }, 10)
 
   const navigate = useNavigate()
-
   function handleClickBack() {navigate("/")} // back to home
-  function handleLogin() { // next page...
+
+  async function handleLogin() {
     let username = document.getElementById("username").value
     if (username.length == 0) {
+      document.getElementById("login-message").style.color = "F54242"
       document.getElementById("login-message").textContent = "Error: please type a username."
     } else {
-      document.getElementById("login-message").textContent = ""
-      getUserData(username.toLowerCase(), username)
 
-      setTimeout(() => {
-        if (document.getElementById("login-message").textContent === "") {
+      await get(child(dbRef, `users/${username}`)).then((snapshot) => {
+        if (snapshot.exists()) { // username exists
           document.getElementById("login-message").style.color = "#17AD00" // change text color to green for successful login
           document.getElementById("login-message").textContent = "Success!"
-          setTimeout(() => {
-            // error handling: disable the button before moving to the next page.
-            document.getElementById("login-button").disabled = true;
-            setTimeout(() => {
-              navigate("/graphs") // delay movement to graphs route to enable success text to show
-            }, 450)
-          }, 400)
+
+        } else { // username does not exist
+          document.getElementById("login-message").textContent = "Username not found!"
         }
-      }, 500)
+      }).catch((error) => { // error catching
+        console.error(error) // ignore null textContent error
+      })
+
+      if (document.getElementById("login-message").textContent === "Success!") {
+        // disable the button before moving to the next page
+        document.getElementById("login-button").disabled = true
+
+        currentUser[0] = username // set currentUser variable - data will be written to here upon login
+
+        setTimeout(() => {
+          navigate("/graphs")
+        }, 200)
+      }
     }
   }
 
