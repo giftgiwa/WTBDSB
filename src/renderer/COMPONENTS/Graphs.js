@@ -4,7 +4,13 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp'
 import '../App.css'
 import '../css/Graphs.css'
 import { currentUser } from '../../backend/database.js'
-import { SVG } from '@svgdotjs/svg.js'
+// import { SVG } from '@svgdotjs/svg.js'
+// import { svgPanZoom } from '~svg-pan-zoom'
+
+
+const $ = require('jquery')
+const svgPanZoom = require('svg-pan-zoom')
+
 
 const GraphPaper = () => {
   const svgRef = useRef(null);
@@ -51,6 +57,15 @@ const GraphPaper = () => {
     }
   }, []);
 
+  $(document).ready(function() {
+    // console.log("document ready!")
+    console.log(document.getElementById("GRAPHS"))
+
+    let panZoomGrid = svgPanZoom('#grid');
+
+
+  })
+
   // the div for the graphs takes a bit of time to render.
 
   return (
@@ -73,9 +88,9 @@ export default function Graphs() {
     navigate("/")
   }
 
-  setTimeout(() => {
-    console.log(document.getElementById("GRAPHS"))
-  }, 100)
+  // setTimeout(() => {
+  //   console.log(document.getElementById("GRAPHS"))
+  // }, 100)
 
 
   return (

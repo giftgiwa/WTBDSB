@@ -1,12 +1,10 @@
 import { MemoryRouter as Router, Routes, Route } from 'react-router-dom'
 import { useNavigate } from 'react-router'
-
 import perspective_grid from '../../assets/images/perspective_grid.jpg'
 import TitleBar from './components/title_bar.js'
 import Login from './components/Login.js'
 import Signup from './components/Signup.js'
 import Graphs from './components/Graphs.js'
-
 import './css/Home.css'
 import './App.css'
 
