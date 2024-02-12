@@ -48,26 +48,8 @@
   background-color: rgba(0, 0, 0, 0.05);
 } */
 
-#panzoom-element {
-  width: 800px;
-  height: 600px;
-  position: absolute;
-  top: 200px;
-  left: 200px;
-  background-color: black;
-}
-
-#canvas {
-  width: 100%;
-  height: 100%;
-  /* overflow: hidden; */
-  position: absolute;
-  left: 0;
-  top: 0;
-  background-color:#f5f5f5;
-}
-
-#gridline {
-  stroke:rgba(0,0,0, 0.5);
-  stroke-width:1.5;
+#grid {
+  border: 0;
+  overflow-y: hidden;
+  overflow-x: scroll;
 }
