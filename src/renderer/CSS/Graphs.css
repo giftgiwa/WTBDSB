@@ -10,7 +10,6 @@
   position: absolute;
 }
 
-
 #return {
   top: 50px;
   left: 50px;
@@ -23,30 +22,6 @@
   top: 5px;
   left: 5px;
 }
-
-/* #controls-button {
-  background-color: rgba(0, 0, 0, 0.1);
-  border: 0;
-  transition: 0.2s;
-  height: 40px;
-  margin: 0;
-  font-family: "JetBrains Mono", monospace;
-  position:absolute;
-  padding: 10px;
-  box-sizing: border-box;
-}
-
-#transform-box {
-  width: 800px;
-  height: 600px;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-}
-
-.controls-button:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-} */
 
 #grid {
   border: 0;

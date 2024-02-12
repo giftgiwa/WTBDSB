@@ -1,49 +1,10 @@
 import { useNavigate } from 'react-router'
 import { useRef, useEffect } from 'react'
-// import { TransformWrapper, TransformComponent, useControls } from "react-zoom-pan-pinch"
 import ExitToAppIcon from '@mui/icons-material/ExitToApp'
 import '../App.css'
 import '../css/Graphs.css'
 import { currentUser } from '../../backend/database.js'
 import { SVG } from '@svgdotjs/svg.js'
-
-
-/*
-let Canvas = props => {
-  const canvasRef = useRef(null)
-
-  useEffect(() => {
-    const canvas = document.getElementById("canvas")
-    const ctx = canvas.getContext('2d')
-    canvas.width = window.innerWidth
-    canvas.height = window.innerHeight
-    function drawText(text, x, y, size, font) {
-      ctx.font = `${size}px ${font}`
-      ctx.fillText(text, x, y)
-    }
-
-    ctx.fillStyle = '#2f2f2f'
-    ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height)
-
-    ctx.fillStyle = "#fff"
-    drawText("canvas test text", 400, 300, 20, "courier")
-  })
-  return <canvas ref={canvasRef} {...props}/>
-}
-*/
-
-/*
-const Controls = () => {
-  const { zoomIn, zoomOut, resetTransform } = useControls();
-  return (
-    <>
-      <button className = "controls-button" onClick={() => zoomIn()}>Zoom In</button>
-      <button className = "controls-button" onClick={() => zoomOut()}>Zoom Out</button>
-      <button className = "controls-button" onClick={() => resetTransform()}>Reset</button>
-    </>
-  );
-};
-*/
 
 const GraphPaper = () => {
   const svgRef = useRef(null);
