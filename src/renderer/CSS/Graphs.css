@@ -26,5 +26,15 @@
 #grid {
   border: 0;
   overflow-y: hidden;
-  overflow-x: scroll;
+  overflow-x: hidden;
+  position: absolute;
+  top: -300px;
+  left: -200px;
+}
+
+#graph-paper {
+  width: 800px;
+  height: 600px;
+  overflow-y: hidden;
+  overflow-x: hidden;
 }

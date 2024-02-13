@@ -21,11 +21,11 @@ const GraphPaper = () => {
 
     const cellSize = gridSize / numRows
 
-    // Create grid lines
+    // grid lines
     for (let i = 0; i <= numRows; i++) {
       const y = i * cellSize
 
-      // Horizontal lines
+      // horizontal lines
       const horizontalLine = document.createElementNS('http://www.w3.org/2000/svg', 'line')
       horizontalLine.setAttribute('x1', '0')
       horizontalLine.setAttribute('y1', y)
@@ -46,7 +46,7 @@ const GraphPaper = () => {
     for (let j = 0; j <= numCols; j++) {
       const x = j * cellSize;
 
-      // Vertical lines
+      // vertical lines
       const verticalLine = document.createElementNS('http://www.w3.org/2000/svg', 'line')
       verticalLine.setAttribute('x1', x)
       verticalLine.setAttribute('y1', '0')
@@ -68,7 +68,48 @@ const GraphPaper = () => {
     // console.log("document ready!")
     console.log(document.getElementById("GRAPHS"))
 
-    let panZoomGrid = svgPanZoom('#grid')
+
+    let beforePan = function(oldPan, newPan){
+      let stopHorizontal = false
+        , stopVertical = false
+        , gutterWidth = 1000
+        , gutterHeight = 1000
+          // Computed variables
+        , sizes = this.getSizes()
+        , leftLimit = -((sizes.viewBox.x + sizes.viewBox.width) * sizes.realZoom) + gutterWidth
+        , rightLimit = sizes.width - gutterWidth - (sizes.viewBox.x * sizes.realZoom)
+        , topLimit = -((sizes.viewBox.y + sizes.viewBox.height) * sizes.realZoom) + gutterHeight
+        , bottomLimit = sizes.height - gutterHeight - (sizes.viewBox.y * sizes.realZoom)
+
+      // console.log(sizes)
+      let customPan = {}
+      customPan.x = Math.max(leftLimit, Math.min(rightLimit, newPan.x))
+      customPan.y = Math.max(topLimit, Math.min(bottomLimit, newPan.y))
+
+      console.log("left limit: " + leftLimit)
+      console.log("right limit: " + rightLimit)
+      console.log("top limit: " + topLimit)
+      console.log("bottom limit: " + bottomLimit)
+
+
+      return customPan
+    }
+
+
+
+
+
+    // let panZoomGrid = svgPanZoom('#grid')
+    let panZoomGrid = svgPanZoom('#grid', {
+      viewportSelector: "#graph-paper",
+      zoomEnabled: true
+      // , controlIconsEnabled: true
+      , fit: 1
+      , contain: 1
+      , center: 1
+      // , beforePan: beforePan
+    })
+    console.log(panZoomGrid.getSizes())
 
 
   })
@@ -79,6 +120,7 @@ const GraphPaper = () => {
     <div id = "graph-paper">
       {/* <svg id = "grid" ref={svgRef} width="800" height="600" style={{ border: '1px solid black' }}></svg> */}
       <svg id = "grid" ref={svgRef} width="1200" height="1200"></svg>
+
 
 
     </div>
@@ -103,7 +145,7 @@ export default function Graphs() {
         <ExitToAppIcon id = "go-home"></ExitToAppIcon>
       </button>
 
-      
+
 
 
 
