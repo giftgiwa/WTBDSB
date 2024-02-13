@@ -4,56 +4,63 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp'
 import '../App.css'
 import '../css/Graphs.css'
 import { currentUser } from '../../backend/database.js'
-// import { SVG } from '@svgdotjs/svg.js'
-// import { svgPanZoom } from '~svg-pan-zoom'
-
 
 const $ = require('jquery')
 const svgPanZoom = require('svg-pan-zoom')
 
 
 const GraphPaper = () => {
-  const svgRef = useRef(null);
+  const svgRef = useRef(null)
 
   useEffect(() => {
-    const svg = svgRef.current;
+    const svg = svgRef.current
 
-    // Define the size and number of rows and columns
-    const gridSize = 1200;
-    const numRows = 40;
-    const numCols = 40;
+    const gridSize = 1200
+    const numRows = 40
+    const numCols = 40
 
-    // Calculate cell size based on the grid size
-    const cellSize = gridSize / numRows;
+    const cellSize = gridSize / numRows
 
     // Create grid lines
-    for (let i = 0; i < numRows; i++) {
-      const y = i * cellSize;
+    for (let i = 0; i <= numRows; i++) {
+      const y = i * cellSize
 
       // Horizontal lines
-      const horizontalLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-      horizontalLine.setAttribute('x1', '0');
-      horizontalLine.setAttribute('y1', y);
-      horizontalLine.setAttribute('x2', gridSize.toString());
-      horizontalLine.setAttribute('y2', y);
-      horizontalLine.setAttribute('stroke', 'rgba(0, 0, 0, 0.1)');
-      horizontalLine.setAttribute('stroke-width', '1');
-      svg.appendChild(horizontalLine);
+      const horizontalLine = document.createElementNS('http://www.w3.org/2000/svg', 'line')
+      horizontalLine.setAttribute('x1', '0')
+      horizontalLine.setAttribute('y1', y)
+      horizontalLine.setAttribute('x2', gridSize.toString())
+      horizontalLine.setAttribute('y2', y)
+
+      if (i == numRows / 2) {
+        horizontalLine.setAttribute('stroke', 'rgba(0, 0, 0, 1)')
+      } else {
+        horizontalLine.setAttribute('stroke', 'rgba(0, 0, 0, 0.1)')
+      }
+
+      horizontalLine.setAttribute('stroke-width', '1')
+      svg.appendChild(horizontalLine)
     }
 
 
-    for (let j = 0; j < numCols; j++) {
+    for (let j = 0; j <= numCols; j++) {
       const x = j * cellSize;
 
       // Vertical lines
-      const verticalLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-      verticalLine.setAttribute('x1', x);
-      verticalLine.setAttribute('y1', '0');
-      verticalLine.setAttribute('x2', x);
-      verticalLine.setAttribute('y2', gridSize.toString());
-      verticalLine.setAttribute('stroke', 'rgba(0, 0, 0, 0.1)');
-      verticalLine.setAttribute('stroke-width', '1');
-      svg.appendChild(verticalLine);
+      const verticalLine = document.createElementNS('http://www.w3.org/2000/svg', 'line')
+      verticalLine.setAttribute('x1', x)
+      verticalLine.setAttribute('y1', '0')
+      verticalLine.setAttribute('x2', x)
+      verticalLine.setAttribute('y2', gridSize.toString())
+
+      if (j == numRows / 2) {
+        verticalLine.setAttribute('stroke', 'rgba(0, 0, 0, 1)')
+      } else {
+        verticalLine.setAttribute('stroke', 'rgba(0, 0, 0, 0.1)')
+      }
+
+      verticalLine.setAttribute('stroke-width', '1')
+      svg.appendChild(verticalLine)
     }
   }, []);
 
@@ -61,7 +68,7 @@ const GraphPaper = () => {
     // console.log("document ready!")
     console.log(document.getElementById("GRAPHS"))
 
-    let panZoomGrid = svgPanZoom('#grid');
+    let panZoomGrid = svgPanZoom('#grid')
 
 
   })
@@ -88,10 +95,6 @@ export default function Graphs() {
     navigate("/")
   }
 
-  // setTimeout(() => {
-  //   console.log(document.getElementById("GRAPHS"))
-  // }, 100)
-
 
   return (
     <div id="GRAPHS">
@@ -99,6 +102,10 @@ export default function Graphs() {
       <button className = "small-btn prevent-drag" id = "return" onClick={handleExit}>
         <ExitToAppIcon id = "go-home"></ExitToAppIcon>
       </button>
+
+      
+
+
 
       <GraphPaper></GraphPaper>
 
