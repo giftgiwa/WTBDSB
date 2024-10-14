@@ -21,7 +21,7 @@ const GraphPaper = () => {
     // Define the size and number of rows and columns
     const gridSize = 1200;
     const numRows = 40;
-    const numCols = 40;
+    const numCols = 41;
 
     // Calculate cell size based on the grid size
     const cellSize = gridSize / numRows;
@@ -87,10 +87,6 @@ export default function Graphs() {
   function handleExit() { // back to home (log out)
     navigate("/")
   }
-
-  // setTimeout(() => {
-  //   console.log(document.getElementById("GRAPHS"))
-  // }, 100)
 
 
   return (
