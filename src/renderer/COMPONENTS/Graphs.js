@@ -17,7 +17,7 @@ const GraphPaper = () => {
 
     const gridSize = 1200
     const numRows = 40
-    const numCols = 40
+    const numCols = 41
 
     const cellSize = gridSize / numRows
 
